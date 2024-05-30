@@ -169,3 +169,8 @@ iframe {
     height: 75vh;
     background: white;
 }
+
+#statusBar {
+    background-color: white;
+    padding: 5px;
+}
