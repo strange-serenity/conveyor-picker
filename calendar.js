@@ -92,13 +92,30 @@ document.addEventListener('DOMContentLoaded', function () {
     // Инициализация календаря и отображение выбранной даты при загрузке страницы
     updateCalendar();
 
-    let dateBefore = new Date();
-    dateBefore.setDate(dateBefore.getDate() - 1);
-    let datepickerBefore = document.getElementById("datepicker-minusday");
-    datepickerBefore.valueAsDate = dateBefore;
+    let dateMinusDay = new Date();
+    dateMinusDay.setDate(dateMinusDay.getDate() - 1);
+    let datepickerMinusDay = document.getElementById("datepicker-minusday");
+    datepickerMinusDay.valueAsDate = dateMinusDay;
 
-    let currentDate = new Date();
-    let datepicker = document.getElementById("datepicker");
-    datepicker.valueAsDate = currentDate;
+    let datepickerCurrent = document.getElementById("datepicker");
+    datepickerCurrent.valueAsDate = new Date();
 
+    datepickerMinusDay.addEventListener('change', function () {
+        const minusDayValue = datepickerMinusDay.value;
+        if (minusDayValue) {
+            datepickerCurrent.setAttribute('min', minusDayValue);
+        } else {
+            datepickerCurrent.removeAttribute('min');
+        }
+    });
+
+
+    datepickerCurrent.addEventListener('change', function () {
+        const datepickerValue = datepickerCurrent.value;
+        if (datepickerValue) {
+            datepickerMinusDay.setAttribute('max', datepickerValue);
+        } else {
+            datepickerMinusDay.removeAttribute('max');
+        }
+    });
 });
