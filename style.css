@@ -127,6 +127,11 @@ button:hover {
     background: linear-gradient(0deg, rgba(31,163,0,1) 0%, rgba(1,163,0,1) 44%, rgba(0,203,8,1) 49%, rgba(0,255,29,1) 100%);
 }
 
+button:active {
+    background: rgb(33, 190, 0);
+    background: linear-gradient(0deg, rgb(34, 183, 0) 0%, rgb(1, 192, 0) 44%, rgb(0, 217, 8) 49%, rgba(0,255,29,1) 100%);
+}
+
 #submitButton {
     border-color: #5c5e72;
     color: white;
@@ -174,3 +179,4 @@ iframe {
     background-color: white;
     padding: 5px;
 }
+

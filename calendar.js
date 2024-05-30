@@ -3,6 +3,27 @@ document.addEventListener('DOMContentLoaded', function () {
     const yearPicker = document.getElementById('yearPicker');
     const calendarBody = document.querySelector('#calendar tbody');
     const todayButton = document.getElementById('todayButton');
+    const statusBar = document.getElementById('statusBar');
+    const buttonSmenaDay = document.getElementById('button-smena-day');
+    const buttonSmenaNight = document.getElementById('button-smena-night');
+    const buttonSmenaSutki = document.getElementById('button-smena-sutki');
+    const buttonManual = document.getElementById('manual-button');
+    const dateS = document.getElementById('datepicker-minusday');
+    const timeS = document.getElementById('timeSelect-minusday');
+    const datePo = document.getElementById('datepicker');
+    const timePo = document.getElementById('timeSelect');
+    const submitButton = document.getElementById('submitButton');
+
+    function convertToUTCinUnix(dt) {
+        const dtUTC = new Date(dt.toISOString())
+        dtUTC.setHours(dtUTC.getHours() + 2)
+        return dtUTC.getTime();
+    }
+
+    let d1 = "";
+    let d2 = "";
+    let t1 = "07:00";
+    let t2 = "19:00";
 
     // Инициализация годов
     const currentYear = new Date().getFullYear();
@@ -53,6 +74,66 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    function updateFrameContent() {
+        // Обновление StatusBar
+        statusBar.textContent = `Выбран промежуток: ${d1} ${t1} - ${d2} ${t2}`;
+    }
+
+    buttonSmenaDay.addEventListener('click', (event) => {
+        t1 = "07:00";
+        t2 = "19:00";
+        updateFrameContent();
+    })
+
+    buttonSmenaNight.addEventListener('click', (event) => {
+        t1 = "19:00";
+        t2 = "07:00";
+        updateFrameContent();
+    })
+
+    buttonSmenaSutki.addEventListener('click', (event) => {
+        t1 = "19:00";
+        t2 = "19:00";
+        updateFrameContent();
+    })
+
+    buttonManual.addEventListener('click', (event) => {
+        d1 = dateS.value;
+        d2 = datePo.value;
+        t1 = timeS.value;
+        t2 = timePo.value;
+
+        updateFrameContent();
+    })
+
+    dateS.addEventListener('change', (event) => {
+        d1 = dateS.value;
+        updateFrameContent();
+    })
+
+    datePo.addEventListener('change', (event) => {
+        d2 = datePo.value;
+        updateFrameContent();
+    })
+
+    timeS.addEventListener('change', (event) => {
+        t1 = timeS.value;
+        updateFrameContent();
+    })
+
+    timePo.addEventListener('change', (event) => {
+        t2 = timePo.value;
+        updateFrameContent();
+    })
+
+    submitButton.addEventListener('click', (event) => {
+        let dt1 = new Date(`${d1}T${t1}`);
+        let dt2 = new Date(`${d2}T${t2}`);
+        alert(dt1);
+        const dt1Unix = convertToUTCinUnix(dt1);
+        const dt2Unix = convertToUTCinUnix(dt2);
+        statusBar.textContent =`Выбран промежуток: ${dt1Unix} - ${dt2Unix}`;
+    })
     function updateCalendar() {
         const year = selectedDate.getFullYear();
         const month = selectedDate.getMonth();
@@ -86,8 +167,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
             calendarBody.appendChild(row);
         }
-    }
 
+        d1 = selectedDate.toLocaleDateString();
+
+        // Преобразуем строку в объект даты
+        let parts = d1.split(".");
+        let dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
+
+        // Вычитаем один день
+        dateObj.setDate(dateObj.getDate() - 1);
+
+        // Преобразуем обратно в строку в нужном формате
+        d1 = dateObj.getDate().toString().padStart(2, '0') + '.' +
+            (dateObj.getMonth() + 1).toString().padStart(2, '0') + '.' +
+            dateObj.getFullYear();
+
+        d2 = selectedDate.toLocaleDateString();
+
+        updateFrameContent();
+    }
 
     // Инициализация календаря и отображение выбранной даты при загрузке страницы
     updateCalendar();
@@ -108,7 +206,6 @@ document.addEventListener('DOMContentLoaded', function () {
             datepickerCurrent.removeAttribute('min');
         }
     });
-
 
     datepickerCurrent.addEventListener('change', function () {
         const datepickerValue = datepickerCurrent.value;
