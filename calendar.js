@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const monthPicker = document.getElementById('monthPicker');
     const yearPicker = document.getElementById('yearPicker');
     const calendarBody = document.querySelector('#calendar tbody');
-    const selectedDateDisplay = document.getElementById('selectedDateDisplay');
     const todayButton = document.getElementById('todayButton');
 
     // Инициализация годов
@@ -43,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function () {
         yearPicker.value = today.getFullYear();
         localStorage.setItem('selectedDate', selectedDate);
         updateCalendar();
-        displaySelectedDate();
     });
 
     calendarBody.addEventListener('click', (event) => {
@@ -52,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
             selectedDate.setDate(day);
             localStorage.setItem('selectedDate', selectedDate);
             updateCalendar();
-            displaySelectedDate();
         }
     });
 
@@ -91,11 +88,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function displaySelectedDate() {
-        selectedDateDisplay.textContent = 'Выбранная дата: ' + selectedDate.toLocaleDateString('ru-RU');
-    }
 
     // Инициализация календаря и отображение выбранной даты при загрузке страницы
     updateCalendar();
-    displaySelectedDate();
+
+    let dateBefore = new Date();
+    dateBefore.setDate(dateBefore.getDate() - 1);
+    let datepickerBefore = document.getElementById("datepicker-minusday");
+    datepickerBefore.valueAsDate = dateBefore;
+
+    let currentDate = new Date();
+    let datepicker = document.getElementById("datepicker");
+    datepicker.valueAsDate = currentDate;
+
 });

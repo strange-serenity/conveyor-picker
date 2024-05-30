@@ -7,62 +7,135 @@
 
 </head>
 <body>
-<nav>
-    <div id="calendar-container">
-        <select id="monthPicker">
-            <option value="0">Январь</option>
-            <option value="1">Февраль</option>
-            <option value="2">Март</option>
-            <option value="3">Апрель</option>
-            <option value="4">Май</option>
-            <option value="5">Июнь</option>
-            <option value="6">Июль</option>
-            <option value="7">Август</option>
-            <option value="8">Сентябрь</option>
-            <option value="9">Октябрь</option>
-            <option value="10">Ноябрь</option>
-            <option value="11">Декабрь</option>
-        </select>
-        <select id="yearPicker">
-            <!-- Годы будут добавлены программно -->
-        </select>
-        <table id="calendar">
-            <thead>
-            <tr>
-                <th>Вс</th>
-                <th>Пн</th>
-                <th>Вт</th>
-                <th>Ср</th>
-                <th>Чт</th>
-                <th>Пт</th>
-                <th>Сб</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Дни месяца будут добавлены здесь -->
-            </tbody>
-        </table>
-        <p id="selectedDateDisplay">Выбранная дата: </p>
-    </div>
-    <button id="todayButton">Сегодня</button>
-    <div id="sutki-container">
-        <div id="sutki-grid">
-            <div id="div-smena"><button>Сутки сменные</button></div>
-            <div id="div-smena-day">
-                <button class="button-smena">1 смена 19:00-07:00</button>
+<div id="wrapper">
+    <nav>
+        <div id="calendar-container">
+            <div id="calendar-selects">
+                <select id="monthPicker">
+                    <option value="0">Январь</option>
+                    <option value="1">Февраль</option>
+                    <option value="2">Март</option>
+                    <option value="3">Апрель</option>
+                    <option value="4">Май</option>
+                    <option value="5">Июнь</option>
+                    <option value="6">Июль</option>
+                    <option value="7">Август</option>
+                    <option value="8">Сентябрь</option>
+                    <option value="9">Октябрь</option>
+                    <option value="10">Ноябрь</option>
+                    <option value="11">Декабрь</option>
+                </select>
+                <select id="yearPicker">
+                    <!-- Годы будут добавлены программно -->
+                </select>
             </div>
-            <div id="div-smena-night">
-                <button class="button-smena">2 смена 07:00-19:00</button></div>
-            <div id="div-manual">
-                <button id="manual-button">Ручной ввод</button>
+            <table id="calendar">
+                <thead>
+                <tr>
+                    <th>Вс</th>
+                    <th>Пн</th>
+                    <th>Вт</th>
+                    <th>Ср</th>
+                    <th>Чт</th>
+                    <th>Пт</th>
+                    <th>Сб</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Дни месяца будут добавлены здесь -->
+                </tbody>
+            </table>
+        </div>
+        <button id="todayButton">Сегодня</button>
+        <div id="sutki-container">
+            <div id="sutki-grid">
+                <div id="div-smena"><button>Сутки сменные</button></div>
+                <div id="div-smena-day">
+                    <button class="button-smena">1 смена 19:00-07:00</button>
+                </div>
+                <div id="div-smena-night">
+                    <button class="button-smena">2 смена 07:00-19:00</button></div>
+                <div id="div-manual">
+                    <button id="manual-button">Ручной ввод</button>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="time-container"></div>
-    <button id="submitButton">Вывести</button>
-</nav>
-
-
+        <div id="time-container">
+            <div id="time-grid">
+                <div id="time-empty"></div>
+                <div id="time-data">Дата</div>
+                <div id="time-hour">Час</div>
+                <div id="time-s">С</div>
+                <div id="time-s-data">
+                    <input type="date" id="datepicker-minusday" name="datepicker-minusday">
+                </div>
+                <div id="time-s-hour">
+                    <select id="timeSelect-minusday" name="timeSelect-minusday">
+                        <option value="0" selected>0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="21">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                    </select>
+                </div>
+                <div id="time-po">По</div>
+                <div id="time-po-data">
+                    <input type="date" id="datepicker" name="datepicker">
+                </div>
+                <div id="time-po-hour">
+                    <select id="timeSelect" name="timeSelect">
+                        <option value="0" selected>0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="21">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button id="submitButton">Вывести</button>
+    </nav>
+    <iframe id="myFrame"></iframe>
+<!--            src = "http://192.168.3.238:3000/public-dashboards/053e451ce5e74e109eee4bdc9960f6b7"-->
+</div>
 <script src="calendar.js"></script>
 </body>
 </html>
